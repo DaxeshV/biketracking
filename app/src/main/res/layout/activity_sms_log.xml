@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2A554C4C"
+    tools:context=".activity.activity.SmsLogActivity">
+
+    <LinearLayout
+        android:id="@+id/linearToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="#03A9F4">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:padding="18dp"
+
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingEnd="@dimen/_50sdp"
+            android:text="Log"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_15ssp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_view_notif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearToolbar"
+        android:divider="@null"
+        android:padding="5dp"
+        android:layout_above="@+id/btnDeleteAll"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/txtLogNoFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="No Log Found"
+        android:textColor="@color/colorGray"
+        android:textSize="@dimen/_17ssp"
+        android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDeleteAll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_shape"
+        android:textAllCaps="false"
+        android:text="Delete All"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_15ssp" />
+</RelativeLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="danjer">
+        <item>0.0s</item>
+        <item>5.0s</item>
+        <item>10.0s</item>
+        <item>15.0s</item>
+        <item>20.0s</item>
+
+    </array>
+</resources>

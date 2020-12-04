@@ -1,0 +1,3 @@
+include ':indicatorseekbar'
+include ':app'
+rootProject.name = "BikeTracker"

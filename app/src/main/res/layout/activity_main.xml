@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGray2"
+
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:ignore="ContentDescription,RtlSymmetry,HardcodedText,ButtonStyle">
+
+    <RelativeLayout
+        android:id="@+id/relativeMain"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_140sdp"
+        android:layout_below="@+id/ll_adapter_tip"
+        android:background="@drawable/background"
+        android:visibility="visible">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgOption"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_baseline_more_vert_24"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/linearButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            tools:ignore="UselessParent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBluetooth"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_5sdp"
+                app:srcCompat="@drawable/bluetooth_symbol_grey_1"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgArm"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_5sdp"
+                app:srcCompat="@drawable/red_lock_closed"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/battery_symbol"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgSecurity"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_80sdp"
+                android:padding="@dimen/_5sdp"
+                app:srcCompat="@drawable/ic_baseline_verified_user_24"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeMain"
+        android:background="@color/colorBlack"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatImageView
+
+                android:id="@+id/imgBLE"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:cropToPadding="false"
+                android:padding="5dp"
+                app:srcCompat="@drawable/bluetooth_symbol_grey_1" />
+            <androidx.appcompat.widget.AppCompatImageView
+
+                android:id="@+id/linearArm"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:cropToPadding="false"
+                android:padding="5dp"
+                app:srcCompat="@drawable/red_lock_closed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/linearDisArm"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:padding="5dp"
+                android:cropToPadding="false"
+                app:srcCompat="@drawable/white_lock_with_order_symbol" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:text="Security Settings"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_13ssp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBusy"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_background"
+                android:padding="3dp"
+                android:text="Busy"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRemote"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_background_disable"
+                android:padding="3dp"
+                android:text="REMOTE"
+
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCustom"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_background_disable"
+                android:text="CUSTOM"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearOne"
+        android:layout_marginBottom="5dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/linearTheree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Warning"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/_16ssp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Sound (dB)"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/_16ssp"
+                   />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:tint="#FF000000"
+                        android:paddingBottom="10dp"
+                        app:srcCompat="@drawable/volume_off" />
+
+                    <com.warkiz.widget.IndicatorSeekBar
+                        android:id="@+id/seekBarWarn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2.4"
+                        android:paddingTop="@dimen/_5sdp"
+                        app:isb_indicator_text_color="@color/colorBlack"
+                        app:isb_indicator_text_size="@dimen/_13ssp"
+                        app:isb_max="100"
+                        app:isb_min="0"
+                        app:isb_only_thumb_draggable="false"
+                        app:isb_progress="25"
+                        app:isb_indicator_color="@color/colorGray2"
+                        app:isb_track_rounded_corners="true"
+                        app:isb_seek_smoothly="true"
+                        app:isb_show_tick_texts="true"
+                        app:isb_thumb_adjust_auto="true"
+                        app:isb_thumb_color="@color/colorTextMuted"
+                        app:isb_thumb_size="@dimen/_20sdp"
+                        app:isb_tick_marks_size="5dp"
+                        app:isb_tick_texts_color="@color/colorTextMuted"
+                        app:isb_tick_texts_size="@dimen/_11ssp"
+                        app:isb_ticks_count="5"
+                        app:isb_track_background_color="@color/colorGray2"
+                        app:isb_track_background_size="3dp"
+                        app:isb_track_progress_color="#FF0C5FF5"
+                        app:isb_track_progress_size="3dp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:padding="@dimen/_2sdp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_speaker" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtSound"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="TEST"
+
+                    android:background="@drawable/btn_test"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_10ssp"
+                   />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:padding="5dp"
+
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Delay (sec)"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/_17ssp"
+                   />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:paddingBottom="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:tint="#FF000000"
+                        android:layout_marginBottom="10dp"
+                        app:srcCompat="@drawable/ic_baseline_hourglass_empty_24" />
+
+                    <com.warkiz.widget.IndicatorSeekBar
+                        android:id="@+id/seekBarDelay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2.4"
+
+                        app:isb_indicator_text_color="@color/colorBlack"
+                        app:isb_indicator_text_size="@dimen/_13ssp"
+                        app:isb_max="20"
+                        app:isb_min="0"
+                        app:isb_indicator_color="@color/colorGray2"
+                        app:isb_only_thumb_draggable="false"
+                        app:isb_progress="25"
+                        app:isb_seek_smoothly="true"
+                        app:isb_show_tick_texts="true"
+                        app:isb_thumb_adjust_auto="true"
+                        app:isb_thumb_color="@color/colorTextMuted"
+                        app:isb_thumb_size="@dimen/_20sdp"
+                        app:isb_tick_marks_size="5dp"
+                        app:isb_tick_texts_color="@color/colorTextMuted"
+                        app:isb_tick_texts_size="@dimen/_13ssp"
+                        app:isb_ticks_count="5"
+                        app:isb_track_background_color="@color/colorGray2"
+                        app:isb_track_background_size="3dp"
+                        app:isb_track_progress_color="#FF0C5FF5"
+                        app:isb_track_progress_size="3dp"/>
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:tint="#FF000000"
+                        android:layout_marginBottom="10dp"
+                        app:srcCompat="@drawable/ic_baseline_hourglass_full_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Alarm"
+                    android:paddingTop="10dp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/_15ssp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Sound [dB]"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_17ssp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:tint="#FF000000"
+                        android:layout_marginBottom="5dp"
+                        app:srcCompat="@drawable/volume_off" />
+
+                    <com.warkiz.widget.IndicatorSeekBar
+                        android:id="@+id/seekbarAlarm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2.4"
+                        android:paddingTop="@dimen/_5sdp"
+                        app:isb_indicator_text_color="@color/colorBlack"
+                        app:isb_indicator_text_size="@dimen/_13ssp"
+                        app:isb_max="100"
+                        app:isb_min="0"
+                        app:isb_indicator_color="@color/colorGray2"
+                        app:isb_only_thumb_draggable="false"
+                        app:isb_progress="25"
+                        app:isb_seek_smoothly="true"
+                        app:isb_show_tick_texts="true"
+                        app:isb_thumb_adjust_auto="true"
+                        app:isb_thumb_color="@color/colorTextMuted"
+                        app:isb_thumb_size="@dimen/_20sdp"
+                        app:isb_tick_marks_size="5dp"
+                        app:isb_tick_texts_color="@color/colorTextMuted"
+                        app:isb_tick_texts_size="@dimen/_13ssp"
+                        app:isb_ticks_count="5"
+                        app:isb_track_background_color="@color/colorGray2"
+                        app:isb_track_background_size="3dp"
+                        app:isb_track_progress_color="#FF0C5FF5"
+                        app:isb_track_progress_size="3dp" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:padding="@dimen/_2sdp"
+                        android:layout_marginBottom="5dp"
+                        app:srcCompat="@drawable/ic_speaker" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/txtTestAlarm"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="TEST"
+                    android:background="@drawable/btn_test"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_10ssp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="5dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Location"
+                    android:textAllCaps="true"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/_15ssp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Refresh(Sec)"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_17ssp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:tint="#FF000000"
+                        android:layout_marginBottom="10dp"
+                        app:srcCompat="@drawable/green_location_icon" />
+
+                    <com.warkiz.widget.IndicatorSeekBar
+                        android:id="@+id/indicator_location"
+                        android:layout_width="0dp"
+                        app:isb_indicator_color="@color/colorGray2"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2.4"
+                        android:paddingTop="@dimen/_5sdp"
+                        app:isb_indicator_text_color="@color/colorBlack"
+                        app:isb_indicator_text_size="@dimen/_13ssp"
+                        app:isb_max="100"
+                        app:isb_min="0"
+                        app:isb_only_thumb_draggable="false"
+                        app:isb_progress="25"
+                        app:isb_seek_smoothly="true"
+                        app:isb_show_tick_texts="true"
+                        app:isb_thumb_adjust_auto="true"
+                        app:isb_thumb_color="@color/colorTextMuted"
+                        app:isb_thumb_size="@dimen/_20sdp"
+                        app:isb_tick_marks_size="5dp"
+                        app:isb_tick_texts_color="@color/colorTextMuted"
+                        app:isb_tick_texts_size="@dimen/_13ssp"
+                        app:isb_ticks_count="5"
+                        app:isb_track_background_color="@color/colorGray2"
+                        app:isb_track_background_size="3dp"
+                        app:isb_track_progress_color="#FF0C5FF5"
+                        app:isb_track_progress_size="3dp" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="0.3"
+                        android:tint="#FF000000"
+                        android:layout_marginBottom="10dp"
+                        app:srcCompat="@drawable/ic_baseline_query_builder_24" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+
+                        >
+                        <TextView
+                            android:id="@+id/txtShow"
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_17sdp"
+
+                            android:gravity="center"
+
+                            android:text="SHOW"
+                            android:background="@drawable/btn_test"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_10ssp"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+
+
+                        >
+                        <TextView
+                            android:id="@+id/txtTestSMS"
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:gravity="center"
+                            android:text="TEST"
+                            android:background="@drawable/btn_test"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_10ssp"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="start"
+                    android:text="LOG"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/_18ssp" />
+                <TextView
+                    android:id="@+id/txtLogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:minLines="5"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/_13ssp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

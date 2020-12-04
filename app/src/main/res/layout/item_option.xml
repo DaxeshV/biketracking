@@ -1,0 +1,135 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription,RtlSymmetry,HardcodedText,ButtonStyle"
+    android:background="@android:color/transparent"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <LinearLayout
+        android:id="@+id/sheetContentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_bottom_sheet_dialog_fragment"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        tools:targetApi="lollipop">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:minWidth="80dp"
+                android:text="Options"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorblack"
+                android:textSize="@dimen/_12ssp"
+                tools:targetApi="jelly_bean" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCancel"
+                android:layout_width="50dp"
+                android:layout_gravity="end"
+                android:layout_height="50dp"
+                android:layout_marginEnd="5dp"
+              android:layout_alignParentEnd="true"
+                android:padding="10dp"
+                android:gravity="center|end"
+                app:srcCompat="@drawable/ic_baseline_close_24"
+                tools:targetApi="jelly_bean" />
+
+        </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+
+            android:layoutDirection="rtl"
+            android:padding="@dimen/_5sdp"
+            android:letterSpacing="0.1"
+            android:textColor="@color/colorblack"
+            android:text="Settings"
+            tools:targetApi="lollipop" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/colorGray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+
+            android:textColor="@color/colorblack"
+            android:layoutDirection="rtl"
+            android:padding="@dimen/_5sdp"
+            android:text="Registration "
+            android:letterSpacing="0.1"
+            tools:targetApi="lollipop" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/colorGray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+
+            android:layoutDirection="rtl"
+            android:textColor="@color/colorblack"
+            android:padding="@dimen/_5sdp"
+            android:letterSpacing="0.1"
+            android:text="Instructions"
+            tools:targetApi="lollipop" />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/colorGray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layoutDirection="rtl"
+            android:textColor="@color/colorblack"
+            android:padding="@dimen/_5sdp"
+            android:letterSpacing="0.1"
+            android:text="Log"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+</FrameLayout>

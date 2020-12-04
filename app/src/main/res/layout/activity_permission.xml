@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#212121"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activity.activity.PermissionActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/gothicb"
+        android:text="Hi,"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_25ssp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.AppCompat.Light"
+        android:visibility="visible" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="In order to access Bike Tracker Alarm App\nPlease allow below permissions."
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:fontFamily="@font/gothicb"
+        android:textSize="@dimen/_12ssp"
+        android:theme="@style/Theme.AppCompat.Light"
+        android:visibility="visible" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/circle_white"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location_permission"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.67"
+                android:text="@string/allow_bike_tracker_alarm_to_access_location"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_9ssp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLocation"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/btndisable"
+            android:text="@string/enable"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgLocationEnable"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@drawable/check"
+            android:padding="20dp"
+            android:layout_gravity="center"
+            android:text="@string/enable"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/circle_white"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enable_gps"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.67"
+                android:text="@string/enable_gps_for_track_the_real_time_ble_connectivity"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_9ssp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGPS"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/btndisable"
+            android:text="@string/enable"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgEnableGps"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@drawable/check"
+            android:padding="20dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/circle_white"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enable_bluetooth"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.67"
+                android:text="@string/enable_bluetooth_for_connecting_bike_tracker_alarm"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_9ssp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/imgBLE"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/btndisable"
+            android:text="@string/enable"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgEnableBle"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@drawable/check"
+            android:padding="20dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/circle_white"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notification_reader"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.67"
+                android:text="@string/lbl_hint"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_9ssp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnReader"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/btndisable"
+            android:text="@string/enable"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgEnableNoti"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@drawable/check"
+            android:padding="20dp"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/circle_white"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/draw_over_other_apps"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.67"
+                android:text="This permission will allow the Bike Tracker Alram \nto Emergency Red Alert if activity detect"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_9ssp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEnableDisplayOver"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/btndisable"
+            android:text="@string/enable"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgDisplayEnable"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@drawable/check"
+            android:padding="20dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStart"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:background="@drawable/button_shape"
+        android:letterSpacing="0.1"
+        android:text="ENTER"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        tools:targetApi="lollipop" />
+
+</LinearLayout>
