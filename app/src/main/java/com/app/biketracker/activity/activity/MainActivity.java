@@ -953,7 +953,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void updateConnectionStateUi(int flag) {
 
         if (flag == 1) {
-            Log.d("dvvvv", "updateConnectionStateUi:1 ");
+
             imgBluetooth.setImageResource(R.drawable.bluetooth_symbol);
             imgBle.setImageResource(R.drawable.bluetooth_symbol);
             Toast.makeText(MainActivity.this, getString(R.string.lbl_connected), Toast.LENGTH_LONG).show();
@@ -961,12 +961,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         } else if (flag == 0) {
-            Log.d("dvvvv", "updateConnectionStateUi:0 ");
+
             imgBluetooth.setImageResource(R.drawable.bluetooth_symbol_grey_1);
             imgBle.setImageResource(R.drawable.bluetooth_symbol_grey_1);
 
             Toast.makeText(MainActivity.this, getString(R.string.lbl_disconnect), Toast.LENGTH_LONG).show();
-            PowerPreference.getDefaultFile().setString(ConstantMethod.BLE_ADDRESS, null);
+
         } else if (flag == 2) {
             Log.d("dvvvv", "updateConnectionStateUi:2 ");
             imgBluetooth.setImageResource(R.drawable.bluetooth_symbol_grey_1);
