@@ -5,15 +5,13 @@ import androidx.multidex.MultiDexApplication;
 
 import com.preference.PowerPreference;
 
-import ovh.karewan.knble.KnBle;
-
 public class MyApp extends MultiDexApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        KnBle.getInstance().init(MyApp.this);
-        MultiDex.install(this);
+
+        MultiDex.install(MyApp.this);
         PowerPreference.init(MyApp.this);
     }
 }

@@ -30,7 +30,7 @@
     <string name="lbl_gpson">GPS Turn</string>
     <string name="lbl_gps_alrt">Please turn on GPS before scanning</string>
     <string name="lbl_cancel">Cancel</string>
-    <string name="lbl_already_connected">BLE Device Already connected</string>
+    <string name="lbl_already_connected">Device Already connected</string>
     <string name="lbl_wait">Please wait...</string>
     <string name="lbl_failed">Device Connect Failed</string>
     <string name="lbl_scan">BLE Scanning Start...</string>

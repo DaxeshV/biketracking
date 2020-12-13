@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothGatt;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -28,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -37,6 +36,12 @@ import com.app.biketracker.R;
 import com.app.biketracker.activity.smslogHelper.NotificationListener;
 import com.app.biketracker.activity.utils.ConstantMethod;
 import com.app.biketracker.activity.utils.SettingObject;
+import com.clj.fastble.BleManager;
+import com.clj.fastble.callback.BleGattCallback;
+import com.clj.fastble.callback.BleScanCallback;
+import com.clj.fastble.data.BleDevice;
+import com.clj.fastble.exception.BleException;
+import com.clj.fastble.scan.BleScanRuleConfig;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -51,21 +56,8 @@ import com.warkiz.widget.OnSeekChangeListener;
 import com.warkiz.widget.SeekParams;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-
-import ovh.karewan.knble.KnBle;
-import ovh.karewan.knble.interfaces.BleGattCallback;
-import ovh.karewan.knble.interfaces.BleScanCallback;
-import ovh.karewan.knble.scan.ScanFilters;
-import ovh.karewan.knble.scan.ScanSettings;
-import ovh.karewan.knble.struct.BleDevice;
-
-import static ovh.karewan.knble.scan.ScanSettings.CALLBACK_TYPE_ALL_MATCHES;
-import static ovh.karewan.knble.scan.ScanSettings.MATCH_MODE_AGGRESSIVE;
-import static ovh.karewan.knble.scan.ScanSettings.MATCH_NUM_FEW_ADVERTISEMENT;
-import static ovh.karewan.knble.scan.ScanSettings.SCAN_MODE_LOW_LATENCY;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -90,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        BleManager.getInstance().init(getApplication());
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver,
                 new IntentFilter(ConstantMethod.GetData));
@@ -105,23 +98,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // here we setup BLE
     private void initBleManager() {
 
-        boolean isInit = KnBle.getInstance().isInit();
-        if (!isInit) {
-            Toast.makeText(MainActivity.this, R.string.lbl_notsupport, Toast.LENGTH_SHORT).show();
 
-        }
-        ScanSettings settings = new ScanSettings.Builder().setScanMode(SCAN_MODE_LOW_LATENCY).
-                setCallbackType(CALLBACK_TYPE_ALL_MATCHES).setMatchMode(MATCH_MODE_AGGRESSIVE).setNbMatch(MATCH_NUM_FEW_ADVERTISEMENT).setReportDelay(0L).
-                build();
+        BleManager.getInstance()
+                .enableLog(true)
+                .setMaxConnectCount(2)
+                .setReConnectCount(1, 5000)
+                .setConnectOverTime(20000)
+                .setOperateTimeout(5000);
+        BleScanRuleConfig scanRuleConfig = new BleScanRuleConfig.Builder()
+                .setAutoConnect(false)
 
-
-        // Here we define BLE Name
-        ScanFilters filters = new ScanFilters.Builder().addDeviceName(ConstantMethod.BLE_NAME).build();
-
-        KnBle.getInstance().setScanFilter(filters);
-        KnBle.getInstance().setScanSettings(settings);
-        KnBle.DEBUG = true;
-
+                .setDeviceName(true, ConstantMethod.BLE_NAME)
+                .setScanTimeOut(10000)
+                .build();
+        BleManager.getInstance().initScanRule(scanRuleConfig);
     }
 
     /*
@@ -313,7 +303,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView textReg = sheetView.findViewById(R.id.txtReg);
         TextView txtLog = sheetView.findViewById(R.id.txtLog);
         TextView txtInstruction = sheetView.findViewById(R.id.txtInstruction);
-        imgCancel.setOnClickListener(v -> bottomSheetDialogOption.cancel());
+        imgCancel.setOnClickListener(v -> {
+            bottomSheetDialogOption.cancel();
+        });
         txtSetting.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
@@ -357,29 +349,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             break;
             case R.id.imgBLE: {
-                BleDevice device = KnBle.getInstance().getBleDeviceFromMac(PowerPreference.getDefaultFile().getString(ConstantMethod.BLE_ADDRESS));
-                if (device != null) {
-                    boolean connected = KnBle.getInstance().isConnected(device);
-                    if(connected) {
+                if (BleManager.getInstance().isSupportBle()) {
+                    boolean connected = BleManager.getInstance().isConnected(PowerPreference.getDefaultFile().getString(ConstantMethod.BLE_ADDRESS));
+                    if (connected) {
                         disconnectBLE();
-                    }else {
-                        boolean isScanning = KnBle.getInstance().isScanning();
-                        if(!isScanning){
-                            connectBLE();
-                        }else {
-                            Toast.makeText(MainActivity.this, getString(R.string.lbl_scan_wait), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }else {
-                    boolean isScanning = KnBle.getInstance().isScanning();
-                    if(!isScanning){
+                    } else {
                         connectBLE();
-                    }else {
-                        Toast.makeText(MainActivity.this,  getString(R.string.lbl_scan_wait), Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(this, getString(R.string.lbl_notsupport), Toast.LENGTH_SHORT).show();
                 }
-
-
             }
             break;
             case R.id.linearArm: {
@@ -464,8 +443,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PowerPreference.getDefaultFile().setBoolean(ConstantMethod.BLE_ENABLE, false);
-                        KnBle.getInstance().disconnectAll();
-                        KnBle.getInstance().destroyAllDevices();
+                        BleManager.getInstance().disconnectAllDevice();
+
 
                     }
                 })
@@ -507,15 +486,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         if (!isGpsOn()) {
                                             gpsAlertDialog();
 
-                                        } else if (!KnBle.getInstance().isBluetoothEnabled()) {
+                                        } else if (!BleManager.getInstance().isBlueEnable()) {
                                             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                                             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                                         } else {
                                             //BLE Scanning process
-                                            if (!KnBle.getInstance().isScanning()) {
-                                                Toast.makeText(MainActivity.this, R.string.lbl_scan, Toast.LENGTH_SHORT).show();
-                                                startScan();
-                                            }
+                                            startScan();
                                         }
                                     } else {
                                         showSettingsDialog();
@@ -537,15 +513,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 if (!isGpsOn()) {
                     gpsAlertDialog();
-                } else if (!KnBle.getInstance().isBluetoothEnabled()) {
+                } else if (!BleManager.getInstance().isBlueEnable()) {
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 
                 } else {
-                    if (!KnBle.getInstance().isScanning()) {
-                        Toast.makeText(this, R.string.lbl_scan, Toast.LENGTH_LONG).show();
-                        startScan();
-                    }
+                    startScan();
                 }
             }
         }
@@ -625,8 +598,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
     @Override
     public void onUserInteraction() {
 
@@ -658,7 +629,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
-        KnBle.getInstance().destroyAllDevices();
+        BleManager.getInstance().disconnectAllDevice();
+        BleManager.getInstance().disconnectAllDevice();
+
         if (handler != null) {
             handler.removeCallbacks(r);
         }
@@ -751,9 +724,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        BluetoothAdapter adapter = KnBle.getInstance().getBluetoothAdapter();
+        BluetoothAdapter adapter = BleManager.getInstance().getBluetoothAdapter();
         Set<BluetoothDevice> pairedDevices = adapter.getBondedDevices();
-        for(BluetoothDevice d: pairedDevices) {
+        for (BluetoothDevice d : pairedDevices) {
             if (d.getAddress().equals(PowerPreference.getDefaultFile().getString(ConstantMethod.BLE_ADDRESS))) {
                 startScan();
             }
@@ -810,43 +783,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Here BLE Scanning process start
     private void startScan() {
 
-        KnBle.getInstance().startScan(new BleScanCallback() {
+        BleManager.getInstance().scan(new BleScanCallback() {
             @Override
-            public void onScanStarted() {
+            public void onScanStarted(boolean success) {
 
             }
 
             @Override
-            public void onScanFailed(int error) {
-                switch (error) {
-                    case BleScanCallback.BT_DISABLED:
-                        Toast.makeText(MainActivity.this, R.string.lbl_enable_bluetooth, Toast.LENGTH_SHORT).show();
-
-                        break;
-                    case BleScanCallback.LOCATION_DISABLED:
-
-
-                        Toast.makeText(MainActivity.this, R.string.lbl_gps_alrt, Toast.LENGTH_SHORT).show();
-                        break;
-                    case BleScanCallback.SCANNER_UNAVAILABLE:
-
-
-                        Toast.makeText(MainActivity.this, R.string.lbl_ble_not_found, Toast.LENGTH_SHORT).show();
-                        break;
-                    case BleScanCallback.UNKNOWN_ERROR:
-
-
-                        Toast.makeText(MainActivity.this, R.string.lbl_something_wrong, Toast.LENGTH_SHORT).show();
-                        break;
-                    case BleScanCallback.SCAN_FEATURE_UNSUPPORTED:
-
-                        Toast.makeText(MainActivity.this, R.string.lbl_ble_scan_not_support, Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-
-            @Override
-            public void onScanResult(@NonNull BleDevice bleDevice) {
+            public void onScanning(BleDevice bleDevice) {
                 final String deviceName = bleDevice.getDevice().getName();
                 if (deviceName != null && deviceName.length() > 0) {
                     // Here we again verify BLE Name
@@ -858,93 +802,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         // Here BLE  Found and start connection process
 
                         Toast.makeText(MainActivity.this, R.string.lbl_found, Toast.LENGTH_SHORT).show();
-                        BluetoothAdapter adapter = KnBle.getInstance().getBluetoothAdapter();
-                        Set<BluetoothDevice> pairedDevices = adapter.getBondedDevices();
-                        
-                        // Here we check device already paired or not. if its paired it auto connect 
-                        for(BluetoothDevice d: pairedDevices) {
-                            if (d.getAddress().equals(PowerPreference.getDefaultFile().getString(ConstantMethod.BLE_ADDRESS))) {
-                                KnBle.getInstance().connect(bleDevice, true, new BleGattCallback() {
-                                    @Override
-                                    public void onConnecting() {
-
-                                        Toast.makeText(MainActivity.this, R.string.lbl_connecting, Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onConnectFailed() {
 
 
-                                        updateConnectionStateUi(2);
-                                    }
-
-                                    @Override
-                                    public void onConnectSuccess(List<BluetoothGattService> services) {
-
-                                        PowerPreference.getDefaultFile().putString(ConstantMethod.BLE_ADDRESS, bleDevice.getDevice().getAddress());
-
-                                        updateConnectionStateUi(1);
-                                    }
-
-                                    @Override
-                                    public void onDisconnected() {
-
-
-                                        updateConnectionStateUi(0);
-                                    }
-                                });
-                            }else {
-                                KnBle.getInstance().connect(bleDevice, false, new BleGattCallback() {
-                                    @Override
-                                    public void onConnecting() {
-
-                                        Toast.makeText(MainActivity.this, R.string.lbl_connecting, Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onConnectFailed() {
-
-
-                                        updateConnectionStateUi(2);
-                                    }
-
-                                    @Override
-                                    public void onConnectSuccess(List<BluetoothGattService> services) {
-                                        PowerPreference.getDefaultFile().putString(ConstantMethod.BLE_ADDRESS, bleDevice.getDevice().getAddress());
-
-                                        updateConnectionStateUi(1);
-                                    }
-
-                                    @Override
-                                    public void onDisconnected() {
-
-
-                                        updateConnectionStateUi(0);
-                                    }
-                                });
+                        BleManager.getInstance().connect(bleDevice, new BleGattCallback() {
+                            @Override
+                            public void onStartConnect() {
+                                Toast.makeText(MainActivity.this, R.string.lbl_connecting, Toast.LENGTH_SHORT).show();
                             }
-                        }
 
-                      
+                            @Override
+                            public void onConnectFail(BleDevice bleDevice, BleException exception) {
+                                updateConnectionStateUi(2);
+                            }
 
+                            @Override
+                            public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
+                                PowerPreference.getDefaultFile().putString(ConstantMethod.BLE_ADDRESS, bleDevice.getDevice().getAddress());
+
+                                updateConnectionStateUi(1);
+                            }
+
+                            @Override
+                            public void onDisConnected(boolean isActiveDisConnected, BleDevice device, BluetoothGatt gatt, int status) {
+                                updateConnectionStateUi(0);
+                            }
+
+                        });
 
                     } else {
                         // Here BLE Not Found
                         Toast.makeText(MainActivity.this, R.string.lbl_notfound, Toast.LENGTH_SHORT).show();
-                        KnBle.getInstance().stopScan();
+                        BleManager.getInstance().cancelScan();
                     }
                 } else {
                     // Here BLE Not Found
                     Toast.makeText(MainActivity.this, R.string.lbl_notfound, Toast.LENGTH_SHORT).show();
-                    KnBle.getInstance().stopScan();
+                    BleManager.getInstance().cancelScan();
                 }
             }
 
             @Override
-            public void onScanFinished(@NonNull HashMap<String, BleDevice> scanResult) {
-                Log.d("dvv", "onScanFinished: "+scanResult);
-            }
+            public void onScanFinished(List<BleDevice> scanResultList) {
 
+            }
 
         });
     }
@@ -957,7 +857,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             imgBluetooth.setImageResource(R.drawable.bluetooth_symbol);
             imgBle.setImageResource(R.drawable.bluetooth_symbol);
             Toast.makeText(MainActivity.this, getString(R.string.lbl_connected), Toast.LENGTH_LONG).show();
-            KnBle.getInstance().stopScan();
+            BleManager.getInstance().cancelScan();
 
 
         } else if (flag == 0) {
@@ -992,16 +892,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_OK) {
             Toast.makeText(MainActivity.this, R.string.lbl_on_sucess, Toast.LENGTH_SHORT).show();
             if (isGpsOn()) {
-                if (!KnBle.getInstance().isBluetoothEnabled()) {
+                if (!BleManager.getInstance().isBlueEnable()) {
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                 } else {
                     setImageBackground(MainActivity.this, R.drawable.green_lock_with_border_closed, imgArm);
                     PowerPreference.getDefaultFile().setBoolean(ConstantMethod.IS_ARM_ENABLE, true);
-                    if (!KnBle.getInstance().isScanning()) {
-                        Toast.makeText(MainActivity.this, R.string.lbl_scan, Toast.LENGTH_LONG).show();
-                        startScan();
-                    }
+                    startScan();
                 }
             } else {
                 Toast.makeText(MainActivity.this, R.string.lbl_enable_gps, Toast.LENGTH_SHORT).show();
@@ -1010,16 +907,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (requestCode == REQUEST_CODE_OPEN_GPS) {
             if (isGpsOn()) {
-                if (!KnBle.getInstance().isBluetoothEnabled()) {
+                if (!BleManager.getInstance().isBlueEnable()) {
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                 } else {
                     setImageBackground(MainActivity.this, R.drawable.green_lock_with_border_closed, imgArm);
-                    PowerPreference.getDefaultFile().setBoolean(ConstantMethod.IS_ARM_ENABLE, true);
-                    if (!KnBle.getInstance().isScanning()) {
-                        Toast.makeText(this, R.string.lbl_scan, Toast.LENGTH_LONG).show();
-                        startScan();
-                    }
+                    startScan();
                 }
             } else {
                 Toast.makeText(MainActivity.this, R.string.lbl_enable_gps, Toast.LENGTH_SHORT).show();
@@ -1046,6 +939,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     };
+
     /*
    method for 10 sec custom setting slider enable
     */

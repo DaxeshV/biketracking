@@ -36,6 +36,7 @@ public class NotificationHandler {
             String title = no.getTitle();
             String text = no.getText();
             if (PowerPreference.getDefaultFile().getBoolean(ConstantMethod.IS_ARM_ENABLE)) {
+
                 if (!ConstantMethod.isEmpty(PowerPreference.getDefaultFile().getString(ConstantMethod.TRACKER_NO))) {
                     if (title.contains(PowerPreference.getDefaultFile().getString(ConstantMethod.TRACKER_NO))) {
 

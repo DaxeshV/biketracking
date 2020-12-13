@@ -48,6 +48,7 @@ public class ConstantMethod {
         return str == null || str.length() == 0;
     }
 
+
     @SuppressLint("UseCompatLoadingForDrawables")
     public static void setImageViewBackground(final Context mContext, int picture, final Button imageView)
     {
