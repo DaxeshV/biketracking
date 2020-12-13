@@ -74,9 +74,9 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
      */
     private void showSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-        builder.setTitle("Need Permissions");
-        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
-        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.lbl_alert_permission));
+        builder.setMessage("App require location permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton(getString(R.string.lbl_go_setting), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -84,7 +84,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        builder.setNegativeButton("Cancel", (dialog, which) -> {
+        builder.setNegativeButton(getString(R.string.lbl_cancel), (dialog, which) -> {
             dialog.cancel();
         });
         builder.show();

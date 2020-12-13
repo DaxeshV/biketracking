@@ -94,13 +94,10 @@ public class PermissionActivity extends AppCompatActivity implements Listener, V
         doNotKillService();
         drawOverApps();
         enableButton();
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PermissionActivity.this,MainActivity.class);
-                startActivity(intent);
-                PermissionActivity.this.finish();
-            }
+        btnStart.setOnClickListener(v -> {
+            Intent intent = new Intent(PermissionActivity.this,MainActivity.class);
+            startActivity(intent);
+            PermissionActivity.this.finish();
         });
     }
 
@@ -215,13 +212,13 @@ public class PermissionActivity extends AppCompatActivity implements Listener, V
 
     private void showSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(PermissionActivity.this);
-        builder.setTitle("Need Permissions");
-        builder.setMessage("This app needs permission to use MainActivity.this feature. You can grant them in app settings.");
-        builder.setPositiveButton("GOTO SETTINGS", (dialog, which) -> {
+        builder.setTitle(getString(R.string.lbl_alert_permission));
+        builder.setMessage("App needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton(getString(R.string.lbl_go_setting), (dialog, which) -> {
             dialog.cancel();
             openSettings();
         });
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        builder.setNegativeButton(getString(R.string.lbl_cancel), (dialog, which) -> dialog.cancel());
         builder.show();
 
     }
@@ -236,7 +233,7 @@ public class PermissionActivity extends AppCompatActivity implements Listener, V
     private void setupBluetoothButtonColor() {
 
         if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "Device Not Support BLE", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.lbl_notsupport), Toast.LENGTH_LONG).show();
         } else if (!mBluetoothAdapter.isEnabled()) {
             PowerPreference.getDefaultFile().setBoolean(ConstantMethod.IS_BLE,false);
             btnBLE.setVisibility(View.VISIBLE);

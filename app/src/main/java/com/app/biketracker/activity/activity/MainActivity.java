@@ -10,7 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -21,7 +20,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -303,9 +301,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView textReg = sheetView.findViewById(R.id.txtReg);
         TextView txtLog = sheetView.findViewById(R.id.txtLog);
         TextView txtInstruction = sheetView.findViewById(R.id.txtInstruction);
-        imgCancel.setOnClickListener(v -> {
-            bottomSheetDialogOption.cancel();
-        });
+        imgCancel.setOnClickListener(v -> bottomSheetDialogOption.cancel());
         txtSetting.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
@@ -437,23 +433,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void disconnectBLE() {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setTitle("Disconnect BLE")
+                .setTitle(R.string.lbl_discoonect_ble)
                 .setMessage(R.string.alert_disconnect)
-                .setPositiveButton(R.string.lbl_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        PowerPreference.getDefaultFile().setBoolean(ConstantMethod.BLE_ENABLE, false);
-                        BleManager.getInstance().disconnectAllDevice();
-
-
-                    }
+                .setPositiveButton(R.string.lbl_yes, (dialogInterface, i) -> {
+                    BleManager.getInstance().disconnectAllDevice();
                 })
 
-                .setNegativeButton(R.string.lbl_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                .setNegativeButton(R.string.lbl_cancel, (dialogInterface, i) -> {
 
-                    }
                 })
                 .show();
         alertDialog.setCanceledOnTouchOutside(true);
@@ -526,16 +513,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void enableREDAlert() {
         new AlertDialog.Builder(MainActivity.this)
-                .setTitle("Permission Required")
-                .setMessage("Allow Bike Tracker to appear on top of other apps.")
+                .setTitle(getString(R.string.lbl_alert_permission))
+                .setMessage(R.string.lbl_window_permission)
                 .setNegativeButton(getString(R.string.lbl_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                MainActivity.this.finish();
-                            }
-                        })
-                .setPositiveButton("Allow",
+                        (dialog, which) -> MainActivity.this.finish())
+                .setPositiveButton(R.string.lbl_allow,
                         (dialog, which) -> {
                             Intent intent = null;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -551,25 +533,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void enableNotificationAccessDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Enable Notification Access").setTitle("Enable permissions");
-        builder.setMessage("For checking log of your bike tracker please enable notification access of bike tracker log")
+        builder.setMessage(getString(R.string.lbl_Notification)).setTitle(R.string.lbl_enable_permission);
+        builder.setMessage(getString(R.string.lbl_noti_msg))
                 .setCancelable(false)
-                .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                            startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                        }
-                        Toast.makeText(MainActivity.this, "Enable Bike Tracker Log", Toast.LENGTH_LONG).show();
+                .setPositiveButton(getString(R.string.enable), (dialog, id) -> {
+                    dialog.cancel();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                        startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                     }
+                    Toast.makeText(MainActivity.this,getString(R.string.lbl_enable_bike_log), Toast.LENGTH_LONG).show();
                 })
-                .setNegativeButton("Later", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                .setNegativeButton(getString(R.string.lbl_cancel), (dialog, id) -> {
 
-                    }
                 });
         AlertDialog alert = builder.create();
-        alert.setTitle("Enable Notification Access");
+        alert.setTitle(getString(R.string.enable_noti_access));
         alert.show();
     }
 
@@ -578,19 +556,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setTitle(R.string.lbl_gpson)
                 .setMessage(R.string.lbl_gps_alrt)
                 .setNegativeButton(R.string.lbl_cancel,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
+                        (dialog, which) -> finish())
                 .setPositiveButton(R.string.lbl_setting,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                startActivityForResult(intent, REQUEST_CODE_OPEN_GPS);
-                            }
+                        (dialog, which) -> {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivityForResult(intent, REQUEST_CODE_OPEN_GPS);
                         })
 
                 .setCancelable(false)
@@ -679,9 +649,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     */
     private void showSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Need Permissions");
+        builder.setTitle(R.string.lbl_alert_permission);
         builder.setMessage(R.string.lbl_location_permission);
-        builder.setPositiveButton("GOTO SETTINGS", (dialog, which) -> {
+        builder.setPositiveButton(R.string.lbl_go_setting, (dialog, which) -> {
             dialog.cancel();
             openSettings();
         });
@@ -739,26 +709,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean isNotificationServiceRunning = isNotificationServiceRunning();
         if (!isNotificationServiceRunning) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Enable Notification Access").setTitle("Enable permissions");
+            builder.setMessage(getString(R.string.enable_noti_access)).setTitle(getString(R.string.lbl_enable_permission));
             builder.setMessage(R.string.lbl_sms_permission)
                     .setCancelable(false)
-                    .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                                startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                            }
-                            Toast.makeText(MainActivity.this, "Enable Bike Tracker Log", Toast.LENGTH_LONG).show();
+                    .setPositiveButton(getString(R.string.enable), (dialog, id) -> {
+                        dialog.cancel();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                            startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                         }
-                    })
-                    .setNegativeButton("Later", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
 
-                        }
+                    })
+                    .setNegativeButton(getString(R.string.lbl_cancel), (dialog, id) -> {
+
                     });
             AlertDialog alert = builder.create();
-            alert.setTitle("Enable Notification Access");
+            alert.setTitle(getString(R.string.enable_noti_access));
             alert.show();
         }
     }
@@ -958,14 +923,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             manageScroll();
 
             handler = new Handler(Looper.getMainLooper());
-            r = new Runnable() {
-                @Override
-                public void run() {
-                    indicatorSeekBarDelay.setEnabled(false);
-                    indicatorSeekBarWarning.setEnabled(false);
-                    indicatorSeekBarAlarm.setEnabled(false);
-                    PowerPreference.getDefaultFile().putBoolean(ConstantMethod.PREF_CUSTOM, false);
-                }
+            r = () -> {
+                indicatorSeekBarDelay.setEnabled(false);
+                indicatorSeekBarWarning.setEnabled(false);
+                indicatorSeekBarAlarm.setEnabled(false);
+                PowerPreference.getDefaultFile().putBoolean(ConstantMethod.PREF_CUSTOM, false);
             };
             startHandler();
         } catch (Exception e) {

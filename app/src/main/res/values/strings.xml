@@ -49,4 +49,14 @@
     <string name="lbl_something_wrong">Something went wrong! Please try later</string>
     <string name="lbl_ble_scan_not_support">BLE Scan feature not supporting</string>
     <string name="lbl_on_sucess">Bluetooth on successfully</string>
+    <string name="lbl_Notification">Enable Notification Access</string>
+    <string name="lbl_noti_msg">For checking log of your bike tracker please enable notification access of bike tracker log</string>
+    <string name="lbl_enable_permission">Enable permissions</string>
+    <string name="lbl_enable_bike_log">Enable Bike Tracker Log</string>
+    <string name="enable_noti_access">Enable Notification Access</string>
+    <string name="lbl_alert_permission">Permissions Require</string>
+    <string name="lbl_go_setting">GOTO SETTINGS</string>
+    <string name="lbl_window_permission">Allow Bike Tracker to appear on top of other apps.</string>
+    <string name="lbl_allow">Allow</string>
+    <string name="lbl_discoonect_ble">Disconnect BLE</string>
 </resources>
