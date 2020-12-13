@@ -868,7 +868,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, getString(R.string.lbl_disconnect), Toast.LENGTH_LONG).show();
 
         } else if (flag == 2) {
-            Log.d("dvvvv", "updateConnectionStateUi:2 ");
+
             imgBluetooth.setImageResource(R.drawable.bluetooth_symbol_grey_1);
             imgBle.setImageResource(R.drawable.bluetooth_symbol_grey_1);
             Toast.makeText(MainActivity.this, R.string.lbl_failed, Toast.LENGTH_LONG).show();
