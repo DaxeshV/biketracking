@@ -107,8 +107,6 @@ public class SplashActivity extends AppCompatActivity {
     private void setupLogPermission() {
         boolean isNotificationServiceRunning = isNotificationServiceRunning();
         if (!isNotificationServiceRunning) {
-
-
             PowerPreference.getDefaultFile().setBoolean(ConstantMethod.IS_READER,false);
         }else {
             PowerPreference.getDefaultFile().setBoolean(ConstantMethod.IS_READER,true);
