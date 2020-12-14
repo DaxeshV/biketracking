@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         BleManager.getInstance().init(getApplication());
 
+
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver,
                 new IntentFilter(ConstantMethod.GetData));
         setupSettingOption();
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BleScanRuleConfig scanRuleConfig = new BleScanRuleConfig.Builder()
                 .setAutoConnect(false)
 
+                // Here pass device name for scan.
                 .setDeviceName(true, ConstantMethod.BLE_NAME)
                 .setScanTimeOut(10000)
                 .build();
@@ -353,7 +355,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         connectBLE();
                     }
                 } else {
-                    Toast.makeText(this, getString(R.string.lbl_notsupport), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.lbl_notsupport), Toast.LENGTH_LONG).show();
                 }
             }
             break;
@@ -435,9 +437,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.lbl_discoonect_ble)
                 .setMessage(R.string.alert_disconnect)
-                .setPositiveButton(R.string.lbl_yes, (dialogInterface, i) -> {
-                    BleManager.getInstance().disconnectAllDevice();
-                })
+                .setPositiveButton(R.string.lbl_yes, (dialogInterface, i) -> BleManager.getInstance().disconnectAllDevice())
 
                 .setNegativeButton(R.string.lbl_cancel, (dialogInterface, i) -> {
 
@@ -751,11 +751,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BleManager.getInstance().scan(new BleScanCallback() {
             @Override
             public void onScanStarted(boolean success) {
-
+                Toast.makeText(MainActivity.this, "Scanning....", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onScanning(BleDevice bleDevice) {
+
                 final String deviceName = bleDevice.getDevice().getName();
                 if (deviceName != null && deviceName.length() > 0) {
                     // Here we again verify BLE Name
@@ -766,13 +767,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         // Here BLE  Found and start connection process
 
-                        Toast.makeText(MainActivity.this, R.string.lbl_found, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.lbl_found, Toast.LENGTH_LONG).show();
 
 
                         BleManager.getInstance().connect(bleDevice, new BleGattCallback() {
                             @Override
                             public void onStartConnect() {
-                                Toast.makeText(MainActivity.this, R.string.lbl_connecting, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, R.string.lbl_connecting, Toast.LENGTH_LONG).show();
                             }
 
                             @Override
@@ -796,12 +797,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     } else {
                         // Here BLE Not Found
-                        Toast.makeText(MainActivity.this, R.string.lbl_notfound, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.lbl_notfound, Toast.LENGTH_LONG).show();
                         BleManager.getInstance().cancelScan();
                     }
                 } else {
                     // Here BLE Not Found
-                    Toast.makeText(MainActivity.this, R.string.lbl_notfound, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.lbl_notfound, Toast.LENGTH_LONG).show();
                     BleManager.getInstance().cancelScan();
                 }
             }
@@ -809,6 +810,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onScanFinished(List<BleDevice> scanResultList) {
 
+               if(scanResultList.isEmpty()){
+                   Toast.makeText(MainActivity.this, "Nearest BLE Device Not Found", Toast.LENGTH_LONG).show();
+               }
             }
 
         });

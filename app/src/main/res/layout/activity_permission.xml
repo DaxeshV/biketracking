@@ -19,7 +19,8 @@
         android:textSize="@dimen/_25ssp"
         android:textStyle="bold"
         android:theme="@style/Theme.AppCompat.Light"
-        android:visibility="visible" />
+        android:visibility="visible"
+        tools:ignore="HardcodedText" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +33,8 @@
         android:fontFamily="@font/gothicb"
         android:textSize="@dimen/_12ssp"
         android:theme="@style/Theme.AppCompat.Light"
-        android:visibility="visible" />
+        android:visibility="visible"
+        tools:ignore="HardcodedText" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +55,8 @@
                 android:gravity="center"
                 android:text="1"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
         </FrameLayout>
 
         <LinearLayout
@@ -103,7 +106,8 @@
             android:padding="20dp"
             android:layout_gravity="center"
             android:text="@string/enable"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <LinearLayout
@@ -126,7 +130,8 @@
                 android:gravity="center"
                 android:text="2"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
         </FrameLayout>
 
         <LinearLayout
@@ -175,7 +180,8 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:background="@drawable/check"
             android:padding="20dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <LinearLayout
@@ -198,7 +204,8 @@
                 android:gravity="center"
                 android:text="3"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
         </FrameLayout>
 
         <LinearLayout
@@ -271,7 +278,8 @@
                 android:gravity="center"
                 android:text="4"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
         </FrameLayout>
 
         <LinearLayout
@@ -393,7 +401,8 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:background="@drawable/check"
             android:padding="20dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -405,11 +414,12 @@
         android:background="@drawable/button_shape"
         android:letterSpacing="0.1"
         android:text="ENTER"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/gothicb"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_17ssp"
         android:textStyle="bold"
-        android:visibility="invisible"
-        tools:targetApi="lollipop" />
+        android:visibility="visible"
+        tools:targetApi="lollipop"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

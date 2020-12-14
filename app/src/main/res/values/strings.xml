@@ -21,7 +21,7 @@
     <string name="notification_reader">Notification Reader</string>
     <string name="lbl_hint">This permission will allow the Bike Tracker Alarm\n to read your notifications of alert and notify\n in case any activity detect</string>
     <string name="draw_over_other_apps">Draw over other apps</string>
-    <string name="lbl_notsupport">Device not supported BLE</string>
+    <string name="lbl_notsupport">Device not support BLE</string>
     <string name="lbl_connected">Device connected successfully</string>
     <string name="lbl_found">BLE device found successfully</string>
     <string name="lbl_notfound">BLE device not found</string>

@@ -35,14 +35,13 @@ public class ConstantMethod {
     public static String IS_GPS="IS_GPS";
     public static String GetData="GetData";
 
-    public static String BLE_ENABLE="BLE_ENABLE";
     public static String LOG_FLAG="LOG_FLAG";
     public static String LOG_FLAG_MESSAGE="LOG_FLAG_MESSAGE";
 
 
 
     // BLE Name Define here
-    public static String BLE_NAME="MyTracker";
+    public static String BLE_NAME="Pinhead Bike Tracker";
 
     public static boolean isEmpty(CharSequence str) {
         return str == null || str.length() == 0;
