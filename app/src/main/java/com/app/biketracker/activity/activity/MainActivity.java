@@ -101,15 +101,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BleManager.getInstance()
                 .enableLog(true)
                 .setMaxConnectCount(2)
-                .setReConnectCount(1, 5000)
+                .setReConnectCount(2, 7000)
                 .setConnectOverTime(20000)
-                .setOperateTimeout(5000);
+                .setOperateTimeout(7000);
         BleScanRuleConfig scanRuleConfig = new BleScanRuleConfig.Builder()
                 .setAutoConnect(false)
-
                 // Here pass device name for scan.
                 .setDeviceName(true, ConstantMethod.BLE_NAME)
-                .setScanTimeOut(10000)
+                .setScanTimeOut(5000)
                 .build();
         BleManager.getInstance().initScanRule(scanRuleConfig);
     }
